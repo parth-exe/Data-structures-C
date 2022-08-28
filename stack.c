@@ -20,7 +20,7 @@ int pop(){
     return result;
 }
 int main () {
-    for(int i=0;i <= STACK_LENGTH; i++ ){
+    for(int i=1;i <= STACK_LENGTH; i++ ){
         printf("Enter the number into stack: \n");
         scanf("%d", &number);
         push(number);
