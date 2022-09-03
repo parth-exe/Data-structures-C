@@ -1,13 +1,20 @@
 #include <stdio.h>
-int array[100],length,pos,ins;
+#define cap (100)
+int array[cap],length,pos,ins;
 int arrCreate();
 int arrDisplay();
 int arrInsert();
 int main(){
-    printf("Enter the length of array: ");
-    scanf("%d", &length);
+    REENTER:
+        printf("\nEnter the length of array: ");
+        scanf("%d", &length);
     char op;
+    char options[] = {'a', 'b', 'c', 'z'};
     do{
+        if(length > cap){
+            printf("Error! Invalid size of array, Re-enter <= 100");
+            goto REENTER;
+        }
         printf("Enter function on array: \n");
         printf("(a)Create an array \n");
         printf("(b)Display created array \n");
@@ -30,16 +37,23 @@ int main(){
             }
         }
         if(op == 'c'){
-            printf("Enter the element for insertion: \n");
-            scanf("%d", &ins);
-            printf("Enter the position to enter the element: \n");
-            scanf("%d", &pos);
-            arrInsert();
+            if(array[0] != 0) {
+                printf("Enter the element for insertion: \n");
+                scanf("%d", &ins);
+                printf("Enter the position to enter the element: \n");
+                scanf("%d", &pos);
+                arrInsert();
+            }
+            else{
+                printf("Array is empty!");
+            }
         }
         if(op == 'z'){
             break;
         }
-
+        if(op != options['a', 'b', 'c', 'z']){
+            printf("Invalid options! Renter\n");
+        }
 
     }while(1);
     return 0;
