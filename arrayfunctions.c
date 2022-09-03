@@ -4,10 +4,11 @@ int array[cap],length,pos,ins;
 int arrCreate();
 int arrDisplay();
 int arrInsert();
+int arrDel();
 int main(){
     REENTER:
-        printf("\nEnter the length of array: ");
-        scanf("%d", &length);
+    printf("\nEnter the length of array: ");
+    scanf("%d", &length);
     char op;
     char options[] = {'a', 'b', 'c', 'z'};
     do{
@@ -48,13 +49,20 @@ int main(){
                 printf("Array is empty!");
             }
         }
+        if(op == 'd'){
+            if(pos>= length+1){
+                printf("Deletion not possible");
+            }
+            else{
+                printf("Enter the element position for deletion: \n");
+                scanf("%d", &pos);
+                arrDel();
+            }
+        }
+
         if(op == 'z'){
             break;
         }
-        if(op != options['a', 'b', 'c', 'z']){
-            printf("Invalid options! Renter\n");
-        }
-
     }while(1);
     return 0;
 }
@@ -78,5 +86,12 @@ int arrInsert(){
         array[i] = array[i-1];
     }
     array[pos - 1] = ins;
+    return 0;
+}
+int arrDel(){
+        for(int i=pos-1;i<=length-1;i++){
+            array[i] = array[i+1];
+        }
+        length--;
     return 0;
 }
