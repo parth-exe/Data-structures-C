@@ -1,5 +1,5 @@
 Repository for Data Structures and Algorithm.
-Arrays: +
+Arrays: + 
 Stacks: + only using array, - using linked lists
 Queues -
 Linked Lists -
