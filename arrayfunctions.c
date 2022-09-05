@@ -5,12 +5,13 @@ int arrCreate();
 int arrDisplay();
 int arrInsert();
 int arrDel();
+int arrSortAs();
+int search(int arr[], int left, int right, int searched);
 int main(){
     REENTER:
     printf("\nEnter the length of array: ");
     scanf("%d", &length);
     char op;
-    char options[] = {'a', 'b', 'c', 'z'};
     do{
         if(length > cap){
             printf("Error! Invalid size of array, Re-enter <= 100");
@@ -21,6 +22,8 @@ int main(){
         printf("(b)Display created array \n");
         printf("(c)Insert element \n");
         printf("(d)Delete element \n");
+        printf("(e)Sort array in ascending order \n");
+        printf("(f)Search element in array \n");
         printf("(z)Exit Code \n");
         scanf("%s", &op);
 
@@ -59,6 +62,27 @@ int main(){
                 arrDel();
             }
         }
+        if(op == 'e') {
+            arrSortAs();
+            printf("The array has been sorted in ascending order!\n");
+        }
+        if(op == 'f'){
+            int arr1[100];
+            int n = sizeof(arr1)/sizeof(arr1[0]);
+            for(int i=0; i<n; i++){
+                arr1[i] = array[i];
+            }
+        int x;
+        printf("Enter the element you want to search in array: ");
+        scanf("%d", &x);
+        int result = search(arr1, 0, n - 1, x);
+        if(result == -1){
+            printf("Value is not present in the array!\n");
+        }
+        else{
+            printf("Element %d is found in %d\n",x, result+1);
+        }
+        }
 
         if(op == 'z'){
             break;
@@ -89,9 +113,37 @@ int arrInsert(){
     return 0;
 }
 int arrDel(){
-        for(int i=pos-1;i<=length-1;i++){
-            array[i] = array[i+1];
-        }
-        length--;
+    for(int i=pos-1;i<=length-1;i++){
+        array[i] = array[i+1];
+    }
+    length--;
     return 0;
+}
+int arrSortAs(){
+    for(int i=0; i<length; i++){
+        for(int j=i+1;j<length; j++){
+            if(array[i] > array[j]){
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+    return 0;
+}
+int search(int arr[], int left, int right, int searched){
+    while (right>=left){
+        int mid = left - (right - left) / 2;
+        if (arr[mid] == searched) {
+            return mid;
+        }
+        if (arr[mid] > searched) {
+            return search(arr, searched, left, mid - 1);
+        }
+        if (arr[mid] < searched) {
+            return search(arr, searched, mid + 1, right);
+
+        }
+    }
+    return -1;
 }
