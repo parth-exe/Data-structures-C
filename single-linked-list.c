@@ -20,6 +20,19 @@ void print_ll(nodez *head){
     }
     printf("\n");
 }
+void insertion(nodez *inserted, nodez* new){
+    new->next = inserted->next;
+    inserted->next = new;
+
+}
+nodez *search(nodez *head, int var){
+    nodez *temp = head;
+    while(temp != NULL){
+        if(temp->var == var) return temp;
+        temp = temp->next;
+    }
+    return NULL;
+}
 
 int main(){
     int x;
@@ -41,5 +54,11 @@ int main(){
         head = temp;
     }
     print_ll(head);
+    insertion(temp->next, createNode(14));
+    print_ll(head);
+    printf("%d \n", head->next->next->var);
+    printf("%d \n", head->var);
+    temp = search(head, 13);
+    printf("Found node %d \n", temp->var);
     return 0;
 }
