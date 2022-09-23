@@ -30,10 +30,10 @@ void insertion(nodez *inserted, nodez* new){
     new->prev = inserted;
     inserted->next = new;
 }
-void delete(nodez **head_ref, int x){
-    nodez *temp = *head_ref, *prev;
+void delete(nodez **temphead, int x){
+    nodez *temp = *temphead, *prev;
     if(temp != NULL && temp->var == x){
-        *head_ref = temp->next;
+        *temphead = temp->next;
         free(temp);
         return;
     }
@@ -103,6 +103,7 @@ int main(){
                 printf("Enter element for deletion: \n");
                 scanf("%d", &tmp);
                 delete(&head, tmp);
+                print_ll(head);
                 break;
             case 5:
                 printf("Enter the node to be searched: \n");
