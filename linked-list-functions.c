@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 typedef struct node{
     int var;
     struct node* next;
@@ -14,14 +13,18 @@ nodez *createNode(int var){
     result->prev = NULL;
     return result;
 }
-void print_ll(nodez *head){
+void print_ll(nodez *head) {
     nodez *temperory = head;
-    while(temperory != NULL){
-        printf("%d--", temperory->var);
-      temperory =  temperory->next;
+    if(head == NULL){
+        printf("The linked list is empty");
     }
-    printf("\n");
-}
+        while (temperory != NULL) {
+            printf("%d--", temperory->var);
+            temperory = temperory->next;
+        }
+
+        printf("\n");
+    }
 void insertion(nodez *inserted, nodez* new){
     new->next = inserted->next;
     if(new->next != NULL){
@@ -29,6 +32,19 @@ void insertion(nodez *inserted, nodez* new){
     }
     new->prev = inserted;
     inserted->next = new;
+}
+void sort(nodez *head){
+    nodez *i, *j;
+    int tmpp;
+    for(i= head; i->next != NULL; i=i->next){
+        for(j=i->next; j != NULL;j=j->next){
+            if(i->var > j->var ){
+            tmpp = j->var;
+            j->var = i->var;
+            i->var = tmpp;
+            }
+        }
+    }
 }
 void delete(nodez **temphead, int x){
     nodez *temp = *temphead, *prev;
@@ -70,6 +86,7 @@ int main(){
         printf("3. Insert \n");
         printf("4. Delete \n");
         printf("5. Search \n");
+        printf("6. Sort \n");
         printf("0. To exit code \n");
         scanf("%d", &choice);
 
@@ -88,9 +105,11 @@ int main(){
                     temp->next = head;
                     head = temp;
                 }
+                sort(head);
                 print_ll(head);
                 break;
             case 2:
+                sort(head);
                 print_ll(head);
                 break;
             case 3:
@@ -110,6 +129,10 @@ int main(){
                 scanf("%d", &tmp);
                 temp = search(head, tmp);
                 print_ll(head);
+
+            case 6:
+                sort(head);
+                printf("The linked list has been sorted! \n");
             default:
                 printf("Enter choice again! \n");
                 break;
