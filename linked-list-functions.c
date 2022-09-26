@@ -18,13 +18,13 @@ void print_ll(nodez *head) {
     if(head == NULL){
         printf("The linked list is empty");
     }
-        while (temperory != NULL) {
-            printf("%d--", temperory->var);
-            temperory = temperory->next;
-        }
-
-        printf("\n");
+    while (temperory != NULL) {
+        printf("%d--", temperory->var);
+        temperory = temperory->next;
     }
+
+    printf("\n");
+}
 void insertion(nodez *inserted, nodez* new){
     new->next = inserted->next;
     if(new->next != NULL){
@@ -39,9 +39,9 @@ void sort(nodez *head){
     for(i= head; i->next != NULL; i=i->next){
         for(j=i->next; j != NULL;j=j->next){
             if(i->var > j->var ){
-            tmpp = j->var;
-            j->var = i->var;
-            i->var = tmpp;
+                tmpp = j->var;
+                j->var = i->var;
+                i->var = tmpp;
             }
         }
     }
@@ -89,7 +89,6 @@ int main(){
         printf("6. Sort \n");
         printf("0. To exit code \n");
         scanf("%d", &choice);
-
         switch(choice){
             case 1:
                 printf("Enter the length of linked list: \n");
@@ -105,11 +104,9 @@ int main(){
                     temp->next = head;
                     head = temp;
                 }
-                sort(head);
                 print_ll(head);
                 break;
             case 2:
-                sort(head);
                 print_ll(head);
                 break;
             case 3:
@@ -142,6 +139,7 @@ int main(){
             break;
         }
     }while(1);
+    system("cls");
 
     return 0;
 }
