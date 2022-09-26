@@ -138,8 +138,8 @@ int main(){
         if(choice == 0){
             break;
         }
+
     }while(1);
-    system("cls");
 
     return 0;
 }
