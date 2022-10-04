@@ -15,43 +15,46 @@ tree *createnode(int value){
     }
     return result;
 }
-void tabs(int tabbing){
-    for(int i=0;i<tabbing; i++){
-        printf("\t");
-    }
-}
 void print(tree *root, int space){
     if(root == NULL){
-        tabs(space);
         printf("Empty \n");
         return;
     } 
-    tabs(space);
     printf("Root: %d", root->value);
-    printf("-Left\n");
-    tabs(space);
+    printf("\n-Left\n");
     print(root->left, space+1);
     printf("-Right\n");
-    tabs(space);
     print(root->right, space+1);
 }
 void printtree(tree *root){
     print(root, 0);
 }
-
+tree *insert(tree *inserted, int value){
+    if(inserted == NULL){
+        createnode(value);
+        return;
+    }
+    if(value < inserted->value){
+        inserted->left = insert(inserted->left, value);
+    }
+    if(value > inserted->value){
+        inserted->right = insert(inserted->right, value);
+    }
+    return inserted;
+}
 int main(){
-    tree *n1 = createnode(52);
-    tree *n2 = createnode(32);
-    tree *n3 = createnode(55);
-    tree *n4 = createnode(133);
-    tree *n5 = createnode(1);
-
-    n1->left = n2;
-    n1->right = n3;
-    n3->left = n4;
-    n3->right = n5;
-
-    printtree(n1);
-
+tree *root_node = NULL;
+root_node = createnode(3);
+tree *n1 = createnode(4);
+tree *n2 = createnode(66);
+tree *n3 = createnode(32);
+tree *n4 = createnode(11);
+root_node->left = n1;
+root_node->right = n2;
+n2->left = n3;
+n2->right = n4;
+printtree(root_node);
+insert(n3, 99);
+printtree(root_node);
     return 0;
 }
