@@ -25,6 +25,19 @@ void print_ll(nodez *head) {
 
     printf("\n");
 }
+nodez *reverse(struct node *head){
+    nodez *current, *next, *prev;
+    current = head;
+    prev = NULL;
+    next = NULL;
+    while(current != NULL){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+}
 void insertion(nodez *inserted, nodez* new){
     new->next = inserted->next;
     if(new->next != NULL){
@@ -77,7 +90,7 @@ nodez *search(nodez *head, int var){
 }
 
 int main(){
-    int x, length, tail, choice, tmp;
+    int x, length, headelement, choice, tmp;
     nodez *head, *temp;
     do{
         printf("Enter the operations on linked list: \n");
@@ -85,17 +98,18 @@ int main(){
         printf("2. Display \n");
         printf("3. Insert \n");
         printf("4. Delete \n");
-        printf("5. Search \n");
-        printf("6. Sort \n");
-        printf("0. To exit code \n");
+        printf("5. Reverse \n");
+        printf("6. Search \n");
+        printf("7. Sort \n");
+        printf("8. To exit code \n");
         scanf("%d", &choice);
         switch(choice){
             case 1:
                 printf("Enter the length of linked list: \n");
                 scanf("%d", &length);
-                printf("Enter the tail element: \n");
-                scanf("%d", &tail);
-                temp = createNode(tail);
+                printf("Enter the head element: \n");
+                scanf("%d", &headelement);
+                temp = createNode(headelement);
                 head = temp;
                 for(int i=0; i<length-1;i++){
                     printf("Enter other elements [%d]: \n", i+1);
@@ -104,6 +118,7 @@ int main(){
                     temp->next = head;
                     head = temp;
                 }
+                head = reverse(head);
                 print_ll(head);
                 break;
             case 2:
@@ -122,24 +137,24 @@ int main(){
                 print_ll(head);
                 break;
             case 5:
+                head = reverse(head);
+                break;
+            case 6:
                 printf("Enter the node to be searched: \n");
                 scanf("%d", &tmp);
                 temp = search(head, tmp);
                 print_ll(head);
 
-            case 6:
+            case 7:
                 sort(head);
                 printf("The linked list has been sorted! \n");
-            default:
-                printf("Enter choice again! \n");
-                break;
-
         }
-        if(choice == 0){
+        if(choice == 8){
+            system("cls");
             break;
         }
 
-    }while(1);
+    }while(x!=8);
 
     return 0;
 }
