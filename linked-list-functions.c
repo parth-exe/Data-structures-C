@@ -144,17 +144,18 @@ int main(){
                 scanf("%d", &tmp);
                 temp = search(head, tmp);
                 print_ll(head);
-
+                break;
             case 7:
                 sort(head);
                 printf("The linked list has been sorted! \n");
+                break;
         }
-        if(choice == 8){
-            system("cls");
-            break;
-        }
-
-    }while(x!=8);
+            if(choice >= 8){
+                printf("Program ending");
+                system("cls");
+                break;
+    }
+}while(1);
 
     return 0;
 }
